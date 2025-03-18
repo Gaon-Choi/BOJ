@@ -1,0 +1,5 @@
+a=input()
+b=a.split()
+b[0]=int(b[0])
+b[1]=int(b[1])
+print(b[0]/b[1])
