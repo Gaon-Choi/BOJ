@@ -1,30 +1,39 @@
-def DFS(G, V, N):
-	global dfs_result
-	global dfs_visited
+def DFS(graph, v):
+    result = []
+    visited = [False] * len(graph)
 
-	dfs_visited[V] = True
-	dfs_result.append(V)
+    stack = [v]
 
-	for curr_v in sorted(G[V]):
-	    if not dfs_visited[curr_v]:
-	        DFS(G, curr_v, N)
+    while stack:
+        vertex = stack.pop()
+        
+        if not visited[vertex]:
+            visited[vertex] = True
+            result.append(vertex)
+            
+            for curr_v in sorted(graph[vertex], reverse=True):
+                if not visited[curr_v]:
+                    stack.append(curr_v)
+                    
+    return result
 			
-def BFS(G, V, N):
-    global bfs_result
-    global bfs_visited
-	
-    bfs_visited[V] = True
-    bfs_result.append(V)
-	
-    queue = [V]
+def BFS(graph, v):
+    result = []
+    visited = [False] * len(graph)
+
+    visited[v] = True
+    queue = [v]
 	
     while queue:
-	    curr_v = queue.pop(0)
-	    for v in sorted(G[curr_v]):
-	        if not bfs_visited[v]:
-	            bfs_visited[v] = True
-	            bfs_result.append(v)
-	            queue.append(v)
+        vertex = queue.pop(0)
+        result.append(vertex)
+
+        for curr_v in sorted(graph[vertex]):
+            if not visited[curr_v]:
+                visited[curr_v] = True
+                queue.append(curr_v)
+                
+    return result
 
 N, M, V = map(int, input().split())
 
@@ -35,15 +44,9 @@ for _ in range(M):
 	graph[u].append(v)
 	graph[v].append(u)
 
-dfs_result = []
-dfs_visited = [False for _ in range(N + 1)]
+dfs_result = DFS(graph, V)
 
-DFS(graph, V, N)
-
-bfs_result = []
-bfs_visited = [False for _ in range(N + 1)]
-
-BFS(graph, V, N)
+bfs_result = BFS(graph, V)
 
 print(" ".join(map(str, dfs_result)))
 print(" ".join(map(str, bfs_result)))
