@@ -1,14 +1,22 @@
 #include <iostream>
-#include <string>
+using namespace std;
 
-int main(void) {
-	int arr[26] = { 0, };
-	std::string str;
-	std::cin >> str;
-	for (int i = 0; i < str.length(); i++) {
-		arr[(int)(str[i]) - 97] += 1;
+int arr[26];
+string str;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	cin >> str;
+
+	for (char c : str) {
+		arr[c - 'a']++;
 	}
-	for (int i = 0; i < 26; i++)
-		std::cout << arr[i] << " ";
+
+	for (int v : arr) {
+		cout << v << " ";
+	}
+
 	return 0;
 }
