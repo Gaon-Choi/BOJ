@@ -1,13 +1,30 @@
-#include <iostream>
-#include <set>
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, m, temp, cnt;
+map<int, int> map_;
 
 int main() {
-	std::set<int> s;
-	int a, b;
-	int data;
-	std::cin >> a >> b;
-	for (int i = 0; i < a; ++i) std::cin >> data, s.insert(data);
-	for (int i = 0; i < b; ++i) std::cin >> data, s.insert(data);
-	std::cout << a + b - 2 * (a + b - s.size());
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+
+	cin >> n >> m;
+
+	for (int i = 0; i < n; ++i) {
+		cin >> temp;
+		map_[temp]++;
+	}
+
+	for (int i = 0; i < m; ++i) {
+		cin >> temp;
+		map_[temp]++;
+	}
+
+	for (pair<int, int> pa : map_) {
+		if (pa.second == 1)	cnt++;
+	}
+
+	cout << cnt;
+
 	return 0;
 }
