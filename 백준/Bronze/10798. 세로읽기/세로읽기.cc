@@ -1,20 +1,28 @@
-#include <string>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <numeric>
+#include <bits/stdc++.h>
 using namespace std;
 
-char text[5][16];
+vector<string> vec;
+string temp;
+int max_size;
 
 int main() {
-	for (int i = 0; i < 5; i++)
-		std::cin >> text[i];
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	
+	for (int i = 0; i < 5; ++i) {
+		cin >> temp;
+		
+		if (max_size < temp.size()) {
+			max_size = temp.size();
+		}
 
-	for (int i = 0; i < 15; i++) {
-		for (int j = 0; j < 5; j++) {
-            if(text[j][i] != '\0')
-			    std::cout << text[j][i];
+		vec.push_back(temp);
+	}
+
+	for (int i = 0; i < max_size; ++i) {
+		for (auto str : vec) {
+			if (i < str.size())
+				cout << str[i];
 		}
 	}
 
